@@ -1,0 +1,18 @@
+Build Image (Linux base with Go installed):
+- Image name: go-build-only
+- Base image: ubuntu:22.04
+- Purpose: Compile the Go binary
+- Size: ~700–900 MB (large due to OS, Go toolchain, and build dependencies)
+
+Run Image (Final image):
+- Image name: go-from-scratch
+- Base image: alpine
+- Purpose: Run the compiled Go binary only
+- Size: 16.1 MB (Content size: 5.03 MB)
+
+Using a multi-stage build significantly reduces the final image size by
+excluding the Go compiler and build dependencies from the runtime image.
+Only the compiled binary is copied into the final Alpine image.
+
+Final image disk usage: 16.1 MB
+Final image content size: 5.03 MB
